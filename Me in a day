@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>GRIFFINS - 365 DAYS TO BECOME HIM</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: url("https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2000&auto=format&fit=crop") center / cover no-repeat;
+      animation: fadeCar 8s ease-in-out infinite alternate;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, .92),
+        rgba(0, 0, 0, .65),
+        rgba(0, 0, 0, .97)
+      );
+    }
+
+    @keyframes fadeCar {
+      from { opacity: .35; transform: scale(1); }
+      to { opacity: .85; transform: scale(1.05); }
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: auto;
+      padding: 22px 16px 60px;
+      text-align: center;
+    }
+
+    .top {
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 8vw, 42px);
+      line-height: 1.05;
+      margin: 14px 0 6px;
+      text-transform: uppercase;
+    }
+
+    h1 span { color: #ffcc00; }
+
+    .love {
+      font-size: 18px;
+      color: #ff5c8a;
+      margin: 8px 0;
+    }
+
+    .love b { color: #fff; }
+
+    .sub {
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 10px auto;
+    }
+
+    .count {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 22px 0 8px;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .18);
+      backdrop-filter: blur(8px);
+      border-radius: 18px;
+      padding: 14px 6px;
+    }
+
+    .box b {
+      display: block;
+      font-size: clamp(25px, 7vw, 36px);
+      color: #ffcc00;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .box span {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #ddd;
+    }
+
+    .ms-box {
+      grid-column: span 4;
+      background: #ffcc00;
+      color: #000;
+      border-radius: 14px;
+      padding: 10px;
+      font-weight: 900;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .ms-box small {
+      font-size: 12px;
+      display: block;
+      font-weight: 600;
+    }
+
+    .date {
+      font-size: 13px;
+      color: #bbb;
+      margin: 6px 0 18px;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    button:focus-visible,
+    .check:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+
+    .btn-gold {
+      background: #ffcc00;
+      color: #000;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      margin-left: 8px;
+    }
+
+    #notifStatus {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.5;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: rgba(10, 10, 10, .85);
+      border: 1px solid #222;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: left;
+      margin-top: 22px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .card > p {
+      color: #aaa;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .task {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 13px 10px;
+      border-bottom: 1px solid #1f1f1f;
+      animation: show .6s both;
+    }
+
+    .task:last-child { border: 0; }
+
+    @keyframes show {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .num {
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      background: #ffcc00;
+      color: #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .task h3 { font-size: 16px; }
+
+    .task p {
+      font-size: 13px;
+      color: #bbb;
+      margin: 3px 0 0;
+      line-height: 1.5;
+    }
+
+    .check {
+      margin-left: auto;
+      min-width: 42px;
+      min-height: 42px;
+      border: 1px solid #555;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      font-size: 20px;
+      padding: 0;
+      flex: 0 0 42px;
+    }
+
+    .task.done .task-copy {
+      opacity: .55;
+      text-decoration: line-through;
+    }
+
+    .check[aria-pressed="true"] {
+      background: #ffcc00;
+      color: #000;
+      border-color: #ffcc00;
+    }
+
+    .progress {
+      height: 10px;
+      background: #222;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0 4px;
+    }
+
+    #bar {
+      height: 100%;
+      width: 0;
+      background: #ffcc00;
+      transition: width .4s ease;
+    }
+
+    #progressText {
+      font-size: 13px;
+      color: #ffcc00;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .quote {
+      margin-top: 22px;
+      font-style: italic;
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+    .footer {
+      margin-top: 18px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media (max-width: 520px) {
+      .wrap { padding-inline: 12px; }
+      .top { letter-spacing: 2px; }
+      .love { font-size: 16px; }
+      .btn-ghost { margin: 10px 0 0; }
+      .card { padding: 16px 12px; }
+      .task { gap: 9px; padding-inline: 4px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <div class="top">GRIFFINS • 21 NOV 2026 — 21 NOV 2027</div>
+    <h1>365 DAYS<br><span>TO BECOME HIM.</span></h1>
+    <div class="love">For one girl only: <b>Win Memoi ❤️</b> &nbsp;|&nbsp; For one dream: <b>BMW M3</b></div>
+    <p class="sub">
+      No noise. No excuses. One year. One girl. One car. One better man.
+      Every second counts—that's why you can see even the milliseconds.
+    </p>
+
+    <section class="count" aria-label="Countdown to target date">
+      <div class="box"><b id="d">365</b><span>DAYS</span></div>
+      <div class="box"><b id="h">00</b><span>HOURS</span></div>
+      <div class="box"><b id="m">00</b><span>MINUTES</span></div>
+      <div class="box"><b id="s">00</b><span>SECONDS</span></div>
+      <div class="ms-box">
+        <span id="ms">000</span>
+        <small>MILLISECONDS LEFT • EVERY MILLISECOND IS A CHOICE</small>
+      </div>
+    </section>
+
+    <div class="date" id="targetText">Target: 21 November 2027, 00:00:00 (UTC+03:00)</div>
+
+    <button class="btn-gold" id="notifButton" type="button" onclick="enableNotifs()">
+      🔔 Turn ON Daily Notifications
+    </button>
+    <button class="btn-ghost" type="button" onclick="motivate()">💪 Motivate Me Now</button>
+    <p id="notifStatus" role="status" aria-live="polite">
+      Notifications are off. Daily reminders only work while this page is open.
+    </p>
+
+    <section class="card" aria-labelledby="missionHeading">
+      <h2 id="missionHeading">🎯 THE ALPHA MISSION - Do Them One By One</h2>
+      <p>Tap ✅ when you finish one. Your progress saves on this device.</p>
+      <div class="progress" role="progressbar" aria-label="Mission progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="bar"></div>
+      </div>
+      <div id="progressText">0% DONE</div>
+      <div id="tasks"></div>
+    </section>
+
+    <p class="quote" id="quote">"A man who can control himself can control his future."</p>
+    <p class="footer">Made for Griffins &amp; Win Memoi • Keep it private. Keep it loyal. Keep it real.</p>
+  </main>
+
+  <script>
+    "use strict";
+
+    // 21 November 2027 at midnight in UTC+03:00.
+    const target = new Date("2027-11-21T00:00:00+03:00").getTime();
+    const progressKey = "griffinsMissionProgress-v1";
+    const reminderKey = "griffinsDailyReminderEnabled-v1";
+    const lastReminderKey = "griffinsLastReminderDate-v1";
+
+    const tasksData = [
+      { t: "Love Win Memoi Only", d: "Be sincere, loyal, respectful, and honest. Respect her choices and boundaries." },
+      { t: "Train Your Body", d: "Exercise consistently, recover well, and build strength safely." },
+      { t: "Take Care of Your Health", d: "Prioritize sleep, good food, hydration, and regular checkups." },
+      { t: "Build a Useful Skill", d: "Practice something valuable every day—study, work, or a craft." },
+      { t: "Save Toward the BMW M3", d: "Track your spending, save consistently, and make responsible financial decisions." },
+      { t: "Keep Your Word", d: "Do what you said you would do, and be honest when plans change." },
+      { t: "Make Time for Family", d: "Show care and appreciation to the people who support you." },
+      { t: "Read and Learn", d: "Spend a little time each day learning something that helps you grow." },
+      { t: "Stay Calm Under Pressure", d: "Pause before reacting. Choose a response you will respect later." },
+      { t: "Review Your Progress", d: "At the end of each week, reflect on what worked and choose one improvement." }
+    ];
+
+    const quotes = [
+      "A man who can control himself can control his future.",
+      "Small steps every day add up to big change.",
+      "Discipline is choosing what you want most over what you want now.",
+      "Be patient with the process, but consistent with the effort.",
+      "Your actions today are building the person you become tomorrow."
+    ];
+
+    function updateCountdown() {
+      const remaining = Math.max(0, target - Date.now());
+      const days = Math.floor(remaining / 86400000);
+      const hours = Math.floor((remaining % 86400000) / 3600000);
+      const minutes = Math.floor((remaining % 3600000) / 60000);
+      const seconds = Math.floor((remaining % 60000) / 1000);
+      const milliseconds = remaining % 1000;
+
+      document.getElementById("d").textContent = String(days);
+      document.getElementById("h").textContent = String(hours).padStart(2, "0");
+      document.getElementById("m").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("s").textContent = String(seconds).padStart(2, "0");
+      document.getElementById("ms").textContent = String(milliseconds).padStart(3, "0");
+
+      if (remaining === 0) {
+        document.getElementById("targetText").textContent = "Target date reached. Keep building.";
+      }
+    }
+
+    function readProgress() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(progressKey) || "[]");
+        return Array.isArray(saved) ? saved : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveProgress(progress) {
+      try {
+        localStorage.setItem(progressKey, JSON.stringify(progress));
+      } catch {
+        // The page still works for this visit if storage is unavailable.
+      }
+    }
+
+    function renderTasks() {
+      const container = document.getElementById("tasks");
+      const progress = readProgress();
+      container.replaceChildren();
+
+      tasksData.forEach((task, index) => {
+        const isDone = progress.includes(index);
+
+        const row = document.createElement("div");
+        row.className = `task${isDone ? " done" : ""}`;
+        row.style.animationDelay = `${Math.min(index * 70, 700)}ms`;
+
+        const number = document.createElement("div");
+        number.className = "num";
+        number.textContent = String(index + 1);
+        number.setAttribute("aria-hidden", "true");
+
+        const copy = document.createElement("div");
+        copy.className = "task-copy";
+
+        const heading = document.createElement("h3");
+        heading.textContent = task.t;
+
+        const description = document.createElement("p");
+        description.textContent = task.d;
+
+        copy.append(heading, description);
+
+        const check = document.createElement("button");
+        check.type = "button";
+        check.className = "check";
+        check.textContent = isDone ? "✓" : "○";
+        check.setAttribute("aria-label", `${isDone ? "Mark incomplete" : "Mark complete"}: ${task.t}`);
+        check.setAttribute("aria-pressed", String(isDone));
+        check.addEventListener("click", () => toggleTask(index));
+
+        row.append(number, copy, check);
+        container.append(row);
+      });
+
+      updateProgress();
+    }
+
+    function toggleTask(index) {
+      const progress = readProgress();
+      const updated = progress.includes(index)
+        ? progress.filter(item => item !== index)
+        : [...progress, index];
+
+      saveProgress(updated);
+      renderTasks();
+    }
+
+    function updateProgress() {
+      const completed = readProgress().length;
+      const percent = Math.round((completed / tasksData.length) * 100);
+      document.getElementById("bar").style.width = `${percent}%`;
+      document.getElementById("progressText").textContent = `${percent}% DONE`;
+      document.querySelector(".progress").setAttribute("aria-valuenow", String(percent));
+    }
+
+    function motivate() {
+      const quote = quotes[Math.floor(Math.random() * quotes.length)];
+      document.getElementById("quote").textContent = `"${quote}"`;
+    }
+
+    function localDateKey(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function sendDailyReminderIfDue() {
+      if (!("Notification" in window) || Notification.permission !== "granted") return;
+
+      const now = new Date();
+      const today = localDateKey(now);
+      const alreadySent = localStorage.getItem(lastReminderKey) === today;
+
+      // Send once per local calendar day, at or after 9:00 AM, while this page is open.
+      if (now.getHours() < 9 || alreadySent) return;
+
+      try {
+        new Notification("Your daily mission", {
+          body: "Take one small step toward the person you want to become.",
+          tag: "griffins-daily-reminder"
+        });
+        localStorage.setItem(lastReminderKey, today);
+      } catch {
+        document.getElementById("notifStatus").textContent =
+          "The browser couldn't show a notification. You can still use the page normally.";
+      }
+    }
+
+    async function enableNotifs() {
+      const status = document.getElementById("notifStatus");
+
+      if (!("Notification" in window)) {
+        status.textContent = "This browser does not support notifications.";
+        return;
+      }
+
+      if (!window.isSecureContext) {
+        status.textContent = "Notifications require HTTPS or localhost. The countdown and missions still work.";
+        return;
+      }
+
+      try {
+        const permission = await Notification.requestPermission();
+
+        if (permission !== "granted") {
+          status.textContent = permission === "denied"
+            ? "Notifications are blocked in browser settings. You can still use the page normally."
+            : "Notifications were not enabled.";
+          return;
+        }
+
+        localStorage.setItem(reminderKey, "true");
+        status.textContent =
+          "Daily reminders enabled for when this page is open. A reminder may appear after 9:00 AM local time.";
+        sendDailyReminderIfDue();
+      } catch {
+        status.textContent = "Couldn't enable notifications in this browser.";
+      }
+    }
+
+    function restoreReminderStatus() {
+      try {
+        if (localStorage.getItem(reminderKey) === "true" &&
+            "Notification" in window &&
+            Notification.permission === "granted") {
+          document.getElementById("notifStatus").textContent =
+            "Daily reminders are enabled while this page is open.";
+          sendDailyReminderIfDue();
+        }
+      } catch {
+        // Ignore unavailable storage or notification APIs.
+      }
+    }
+
+    updateCountdown();
+    window.setInterval(updateCountdown, 50);
+    renderTasks();
+    restoreReminderStatus();
+
+    // Check periodically in case the page remains open until the reminder time.
+    window.setInterval(sendDailyReminderIfDue, 60000);
+  </script>
+</body>
+</html>
